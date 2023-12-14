@@ -4317,30 +4317,6 @@ layer._SetTransform(renderer,false,offX+pxOff,offY+pxOff,effectiveViewH);for(let
 }
 
 {
-'use strict';{const C3=self.C3;const DOM_COMPONENT_ID="list";C3.Plugins.List=class ListPlugin extends C3.SDKDOMPluginBase{constructor(opts){super(opts,DOM_COMPONENT_ID);this.AddElementMessageHandler("click",(sdkInst,e)=>sdkInst._OnClick(e));this.AddElementMessageHandler("dblclick",(sdkInst,e)=>sdkInst._OnDoubleClick(e));this.AddElementMessageHandler("change",(sdkInst,e)=>sdkInst._OnChange(e))}Release(){super.Release()}}}{const C3=self.C3;C3.Plugins.List.Type=class ListType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass)}Release(){super.Release()}OnCreate(){}}}
-{const C3=self.C3;const C3X=self.C3X;const ITEMS=0;const TOOLTIP=1;const INITIALLY_VISIBLE=2;const ENABLE=3;const TYPE=4;const MULTI_SELECT=5;const AUTO_FONT_SIZE=6;const ID=7;const CLASS_NAME=8;const LIST_BOX=0;const DROPDOWN_LIST=1;const DOM_COMPONENT_ID="list";C3.Plugins.List.Instance=class ListInstance extends C3.SDKDOMInstanceBase{constructor(inst,properties){super(inst,DOM_COMPONENT_ID);this._items=[];this._stringItems="";this._title="";this._isEnabled=true;this._isDropdown=true;this._isMultiSelect=
-false;this._autoFontSize=true;this._id="";this._className="";this._selectedIndex=-1;this._selectedIndices=[];if(properties){const itemsStr=properties[ITEMS];this._items=itemsStr?itemsStr.split("\n"):[];this._stringItems=properties[ITEMS];this._title=properties[TOOLTIP];this.GetWorldInfo().SetVisible(!!properties[INITIALLY_VISIBLE]);this._isEnabled=!!properties[ENABLE];this._isDropdown=properties[TYPE]===DROPDOWN_LIST;this._isMultiSelect=!!properties[MULTI_SELECT];this._autoFontSize=!!properties[AUTO_FONT_SIZE];
-this._id=properties[ID];this._className=properties[CLASS_NAME];if(this._isDropdown)this._selectedIndex=0}this.CreateElement({"id":this._id,"className":this._className,"isDropdown":this._isDropdown,"isMultiSelect":this._isMultiSelect,"items":this._items})}Release(){C3.clearArray(this._items);this._items=null;C3.clearArray(this._selectedIndices);this._selectedIndices=null;super.Release()}GetElementState(){return{"title":this._title,"isEnabled":this._isEnabled,"isMultiSelect":this._isMultiSelect}}_UpdateSelectedIndex(){this.PostToDOMElement("set-selected-index",
-{"selectedIndex":this._selectedIndex})}_ReadSelectionState(e){this._selectedIndex=e["selectedIndex"];this._selectedIndices=e["selectedIndices"]}async _OnClick(e){this._ReadSelectionState(e);this.DispatchScriptEvent("click");await this.TriggerAsync(C3.Plugins.List.Cnds.OnClicked)}async _OnDoubleClick(e){this._ReadSelectionState(e);this.DispatchScriptEvent("dblclick");await this.TriggerAsync(C3.Plugins.List.Cnds.OnDoubleClicked)}async _OnChange(e){this._ReadSelectionState(e);this.DispatchScriptEvent("selectionchange");
-await this.TriggerAsync(C3.Plugins.List.Cnds.OnSelectionChanged)}_GetItemCount(){return this._items.length}_SetSelectedIndex(index){index=Math.floor(index);if(index<0)index=-1;if(index>=this._items.length)return;if(this._selectedIndex===index)return;this._selectedIndex=index;this._selectedIndices=[index];this._UpdateSelectedIndex()}_GetSelectedIndex(){return this._selectedIndex}_GetSelectedCount(){return this._selectedIndices.length}_GetSelectedIndexAt(i){i=Math.floor(i);if(i<0||i>=this._selectedIndices.length)return 0;
-return this._selectedIndices[i]}_GetSelectedTextAt(i){i=Math.floor(i);if(i<0||i>=this._selectedIndices.length)return"";i=this._selectedIndices[i];if(i<0||i>=this._items.length)return"";return this._items[i]}_SetTooltip(title){if(this._title===title)return;this._title=title;this.UpdateElementState()}_GetTooltip(){return this._title}_AddItem(text){this._items.push(text);this.PostToDOMElement("add-item",{"text":text,"index":-1})}_AddItemAt(index,text){index=Math.max(Math.floor(index),0);if(index>=this._items.length){this._items.push(text);
-index=-1}else{this._items.splice(index,0,text);if(this._selectedIndex>=index)this._selectedIndex++;for(let i=0,len=this._selectedIndices.length;i<len;++i)if(this._selectedIndices[i]>=index)this._selectedIndices[i]++}this.PostToDOMElement("add-item",{"index":index,"text":text})}_RemoveItem(index){index=Math.floor(index);if(index<0||index>=this._items.length)return;this._items.splice(index,1);if(this._selectedIndex>=index)this._selectedIndex--;let i=this._selectedIndices.indexOf(index);if(i!==-1)this._selectedIndices.splice(i,
-1);i=0;for(let len=this._selectedIndices.length;i<len;++i)if(this._selectedIndices[i]>=index)this._selectedIndices[i]--;this.PostToDOMElement("remove-item",{"index":index})}_SetItemText(index,text){index=Math.floor(index);if(index<0||index>=this._items.length)return;this._items[index]=text;this.PostToDOMElement("set-item",{"index":index,"text":text})}_GetItemText(index){index=Math.floor(index);if(index<0||index>=this._items.length)return"";return this._items[index]}_Clear(){C3.clearArray(this._items);
-this._selectedIndex=-1;C3.clearArray(this._selectedIndices);this.PostToDOMElement("clear")}_SetMultiSelect(m){m=!!m;if(this._isMultiSelect===m)return;this._isMultiSelect=m;this.UpdateElementState()}_IsMultiSelect(){return this._isMultiSelect}_SetEnabled(e){e=!!e;if(this._isEnabled===e)return;this._isEnabled=e;this.UpdateElementState()}_IsEnabled(){return this._isEnabled}Draw(renderer){}SaveToJson(){return{"title":this._title,"isEnabled":this._isEnabled,"id":this._id,"items":C3.cloneArray(this._items),
-"selectedIndex":this._selectedIndex,"selectedIndices":this._selectedIndices}}LoadFromJson(o){this._title=o["title"];this._isEnabled=o["isEnabled"];this._id=o["id"];this._items=C3.cloneArray(o["items"]);this._stringItems=this._items.join("/n");this._selectedIndex=o["selectedIndex"];this._selectedIndices=o["selectedIndices"];this.UpdateElementState();this.PostToDOMElement("load-state",{"items":this._items,"selectedIndex":this._selectedIndex,"selectedIndices":this._selectedIndices})}GetPropertyValueByIndex(index){switch(index){case ITEMS:return this._stringItems;
-case TOOLTIP:return this._GetTooltip();case ENABLE:return this._IsEnabled();case MULTI_SELECT:return this._IsMultiSelect();case AUTO_FONT_SIZE:return this._autoFontSize}}SetPropertyValueByIndex(index,value){switch(index){case ITEMS:if(this._stringItems===value)return;this._items=value.split("\n");this._stringItems=value;this._selectedIndex=C3.clamp(this._selectedIndex,0,this._items.length-1);this.UpdateElementState();this.PostToDOMElement("load-state",{"items":this._items,"selectedIndex":this._selectedIndex,
-"selectedIndices":this._selectedIndices});break;case TOOLTIP:this._SetTooltip(value);break;case ENABLE:this._SetEnabled(value);break;case MULTI_SELECT:this._SetMultiSelect(value);break;case AUTO_FONT_SIZE:if(this._autoFontSize===!!value)return;this._autoFontSize=!!value;this.UpdateElementState();break}}GetDebuggerProperties(){const prefix="plugins.list";return[{title:prefix+".name",properties:[{name:prefix+".debugger.item-count",value:this._GetItemCount()},{name:prefix+".properties.enabled.name",
-value:this._IsEnabled(),onedit:v=>this._SetEnabled(v)},{name:prefix+".debugger.selected-index",value:this._GetSelectedIndex()}]},{title:prefix+".properties.items.name",properties:this._items.map((item,index)=>({name:"$"+index,value:item,onedit:v=>this._SetItemText(index,v)}))}]}GetScriptInterfaceClass(){return self.IListInstance}};const map=new WeakMap;self.IListInstance=class IListInstance extends self.IDOMInstance{constructor(){super();map.set(this,self.IInstance._GetInitInst().GetSdkInstance())}set selectedIndex(i){C3X.RequireFiniteNumber(i);
-map.get(this)._SetSelectedIndex(i)}get selectedIndex(){return map.get(this)._GetSelectedIndex()}get selectedCount(){return map.get(this)._GetSelectedCount()}getSelectedIndexAt(index){C3X.RequireFiniteNumber(index);return map.get(this)._GetSelectedIndexAt(index)}getSelectedTextAt(index){C3X.RequireFiniteNumber(index);return map.get(this)._GetSelectedTextAt(index)}set tooltip(t){C3X.RequireString(t);map.get(this)._SetTooltip(t)}get tooltip(){return map.get(this)._GetTooltip()}addItem(str){C3X.RequireString(str);
-map.get(this)._AddItem(str)}insertItem(index,str){C3X.RequireFiniteNumber(index);C3X.RequireString(str);map.get(this)._AddItemAt(index,str)}setItemText(index,str){C3X.RequireFiniteNumber(index);C3X.RequireString(str);map.get(this)._SetItemText(index,str)}getItemText(index){C3X.RequireFiniteNumber(index);return map.get(this)._GetItemText(index)}removeItem(index){C3X.RequireFiniteNumber(index);map.get(this)._RemoveItem(index)}clear(){map.get(this)._Clear()}get itemCount(){return map.get(this)._GetItemCount()}}}
-{const C3=self.C3;C3.Plugins.List.Cnds={CompareSelection(cmp,x){return C3.compare(this._selectedIndex,cmp,x)},OnSelectionChanged(){return true},OnClicked(){return true},OnDoubleClicked(){return true},CompareSelectedText(text,case_){const i=this._selectedIndex;if(i<0||i>=this._items.length)return false;const selectedText=this._items[i];if(case_)return selectedText===text;else return C3.equalsNoCase(selectedText,text)},CompareTextAt(i,text,case_){i=Math.floor(i);if(i<0||i>=this._items.length)return false;
-const itemText=this._items[i];if(case_)return itemText===text;else return C3.equalsNoCase(itemText,text)}}}
-{const C3=self.C3;C3.Plugins.List.Acts={Select(index){this._SetSelectedIndex(index)},SetTooltip(title){this._SetTooltip(title)},SetVisible(v){const wi=this.GetWorldInfo();v=v!==0;if(wi.IsVisible()===v)return;wi.SetVisible(v)},AddItem(text){this._AddItem(text)},AddItemAt(index,text){this._AddItemAt(index,text)},Remove(index){this._RemoveItem(index)},SetItemText(index,text){this._SetItemText(index,text)},Clear(){this._Clear()}}}
-{const C3=self.C3;C3.Plugins.List.Exps={ItemCount(){return this._GetItemCount()},ItemTextAt(i){return this._GetItemText(i)},SelectedIndex(){return this._GetSelectedIndex()},SelectedText(){return this._GetItemText(this._GetSelectedIndex())},SelectedCount(){return this._GetSelectedCount()},SelectedIndexAt(i){return this._GetSelectedIndexAt(i)},SelectedTextAt(i){return this._GetSelectedTextAt(i)}}};
-
-}
-
-{
 'use strict';{const C3=self.C3;C3.Behaviors.MoveTo=class MoveToBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.MoveTo.Type=class MoveToType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
 {const C3=self.C3;const C3X=self.C3X;const IBehaviorInstance=self.IBehaviorInstance;const PROP_MAX_SPEED=0;const PROP_ACCELERATION=1;const PROP_DECELERATION=2;const PROP_ROTATE_SPEED=3;const PROP_SET_ANGLE=4;const PROP_STOP_ON_SOLIDS=5;const PROP_ENABLED=6;C3.Behaviors.MoveTo.Instance=class MoveToInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._maxSpeed=200;this._acc=600;this._dec=600;this._rotateSpeed=0;this._setAngle=true;this._stopOnSolids=false;
 this._isEnabled=true;this._speed=0;this._movingAngle=this.GetWorldInfo().GetAngle();this._waypoints=[];if(properties){this._maxSpeed=properties[PROP_MAX_SPEED];this._acc=properties[PROP_ACCELERATION];this._dec=properties[PROP_DECELERATION];this._rotateSpeed=C3.toRadians(properties[PROP_ROTATE_SPEED]);this._setAngle=properties[PROP_SET_ANGLE];this._stopOnSolids=properties[PROP_STOP_ON_SOLIDS];this._isEnabled=properties[PROP_ENABLED]}this._timelineInfo=null;this._lastBezierPosition=NaN;this._lastBezierSegment=
@@ -4419,7 +4395,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.DragnDrop,
 		C3.Plugins.TextBox,
 		C3.Plugins.DrawingCanvas,
-		C3.Plugins.List,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.Mouse.Cnds.OnObjectClicked,
@@ -4455,11 +4430,11 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.GoToLayout,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.System.Cnds.Else,
-		C3.Plugins.System.Acts.SetGroupActive,
 		C3.Plugins.System.Cnds.Every,
 		C3.Plugins.Text.Acts.TypewriterText,
 		C3.Plugins.Text.Acts.SetVisible,
 		C3.Plugins.Sprite.Cnds.CompareY,
+		C3.Plugins.System.Acts.SetGroupActive,
 		C3.Plugins.System.Cnds.TriggerOnce,
 		C3.Plugins.Sprite.Acts.SetY,
 		C3.Plugins.Mouse.Cnds.OnAnyClick,
@@ -4882,7 +4857,6 @@ self.C3_JsPropNameTable = [
 	{同儕a12: 0},
 	{同儕a13: 0},
 	{a文本框3: 0},
-	{列表: 0},
 	{外甥自1: 0},
 	{Sprite15: 0},
 	{Sprite16: 0},
@@ -5087,6 +5061,8 @@ self.C3_JsPropNameTable = [
 	{d10: 0},
 	{單元一背景: 0},
 	{home2: 0},
+	{直平板2: 0},
+	{Skip3: 0},
 	{測驗單元: 0},
 	{例: 0},
 	{單元: 0},
@@ -5459,7 +5435,6 @@ self.InstanceType = {
 	同儕a12: class extends self.ISpriteInstance {},
 	同儕a13: class extends self.ISpriteInstance {},
 	a文本框3: class extends self.ITextInputInstance {},
-	列表: class extends self.IListInstance {},
 	外甥自1: class extends self.ITextInstance {},
 	Sprite15: class extends self.ISpriteInstance {},
 	Sprite16: class extends self.ISpriteInstance {},
@@ -5662,6 +5637,8 @@ self.InstanceType = {
 	d10: class extends self.ISpriteInstance {},
 	單元一背景: class extends self.ISpriteInstance {},
 	home2: class extends self.ISpriteInstance {},
+	直平板2: class extends self.ISpriteInstance {},
+	Skip3: class extends self.ISpriteInstance {},
 	測驗單元: class extends self.ISpriteInstance {},
 	例: class extends self.ISpriteInstance {},
 	單元: class extends self.ISpriteInstance {},
@@ -5823,7 +5800,6 @@ self.C3_ExpressionFuncs = [
 			return () => (v0.GetValue() - 1);
 		},
 		() => "btn7",
-		() => "單元提示",
 		() => 1.4,
 		() => "START",
 		() => 0.3,
@@ -5832,6 +5808,7 @@ self.C3_ExpressionFuncs = [
 		() => "s1選提示",
 		() => "s3選提示",
 		() => "標題",
+		() => "單元提示",
 		() => 427,
 		() => 603,
 		() => 370,
