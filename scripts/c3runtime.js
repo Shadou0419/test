@@ -4481,8 +4481,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.ScriptsInEvents.中耳聲音傳導2事件表_Event7_Act2,
 		C3.Plugins.HTMLElement.Acts.SetPos,
 		C3.Plugins.Sprite.Acts.SetAnim,
-		C3.Plugins.Mouse.Cnds.OnRelease,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
+		C3.Behaviors.DragnDrop.Cnds.IsDragging,
 		C3.Behaviors.DragnDrop.Acts.SetEnabled,
 		C3.Behaviors.DragnDrop.Cnds.OnDrop
 	];
